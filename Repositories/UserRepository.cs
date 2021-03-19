@@ -21,7 +21,7 @@ namespace bouncer.Repositories
         /// <returns></returns>
         public async new Task<User> Add(User user) {
             try {
-                User existing = await FindByEmail(user.Email);
+                User existing = FindByEmail(user.Email);
                 if (existing == null) {
                     return (await _context.AddAsync<User>(user)).Entity;
                 } else {
@@ -33,7 +33,7 @@ namespace bouncer.Repositories
             }
         }
 
-        public async new Task<User> FindByEmail(string email)
+        public User FindByEmail(string email)
         {
             try {
                 User user = _context.Users.FirstOrDefault<User>((user) => user.Email.Equals(email.ToLower()));
